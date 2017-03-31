@@ -5,6 +5,19 @@ import java.util.Arrays;
 
 public class StylistTest {
 
+    @Before
+  public void setUp() {
+    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", null, null);
+  }
+
+  @After
+  public void tearDown() {
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "DELETE FROM stylists *;";
+    con.createQuery(sql).executeUpdate();
+    }
+  }
+
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
@@ -15,7 +28,7 @@ public class StylistTest {
   }
 
   @Test
-  public void getName_StylistInstantiatesWithName_Anna Alessandro() {
+  public void getName_StylistInstantiatesWithName_Anna_Alessandro() {
     Stylist testStylist = new Stylist("Anna Alessandro");
     assertEquals("Anna Alessandro", testStylist.getName());
   }

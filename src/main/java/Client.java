@@ -18,7 +18,6 @@ public class Client{
     return name;
   }
 
-
   public int getStylistId(){
     return stylistId;
   }

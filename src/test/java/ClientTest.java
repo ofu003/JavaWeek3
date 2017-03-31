@@ -6,6 +6,20 @@ import java.time.LocalDateTime;
 
 public class ClientTest {
 
+  @Before
+public void setUp() {
+  DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", null, null);
+}
+
+@After
+public void tearDown() {
+try(Connection con = DB.sql2o.open()) {
+  String sql = "DELETE FROM clients *;";
+  con.createQuery(sql).executeUpdate();
+  }
+}
+
+
   @Rule
 public DatabaseRule database = new DatabaseRule();
 
@@ -54,7 +68,7 @@ public void find_returnsClientWithSameId_secondClient() {
 @Test
 public void equals_returnsTrueIfDescriptionsAretheSame() {
   Client firstClient = new Client("Alice", 1);
-  Client secondClient = new Client("Bob",  2);
+  Client secondClient = new Client("Alice",  1);
   assertTrue(firstClient.equals(secondClient));
 }
 
@@ -79,17 +93,17 @@ public void save_savesStylistIdIntoDB_true() {
   Stylist myStylist = new Stylist("Stylist One");
   myStylist.save();
   Client myClient = new Client("Alice", myStylist.getId());
-  myTask.save();
+  myClient.save();
   Client savedClient = Client.find(myClient.getId());
   assertEquals(savedClient.getStylistId(), myStylist.getId());
 }
 
 @Test
-  public void update_updatesClientDescription_true() {
+  public void update_updatesClientName_true() {
     Client myClient = new Client("Alice", 1);
     myClient.save();
     myClient.update("Bob");
-    assertEquals("Bob", Client.find(myClient.getId()).getDescription());
+    assertEquals("Bob", Client.find(myClient.getId()).getName());
   }
 
   @Test

@@ -1,18 +1,16 @@
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import org.sql2o.*;
 
 public class Client{
   private String name;
-  private String date;
   // SQL calculates this
   private int id;
   //
   private int stylistId;
 
-  public Client(String name, String date, int stylistId){
+  public Client(String name, int stylistId){
     this.name = name;
-    this.date = date;
     this.stylistId = stylistId;
   }
 
@@ -20,9 +18,6 @@ public class Client{
     return name;
   }
 
-  public String getDate(){
-    return date;
-  }
 
   public int getStylistId(){
     return stylistId;
@@ -33,7 +28,7 @@ public class Client{
   }
 
   public static List<Client> all() {
-  String sql = "SELECT id, name, date, stylistId FROM tasks";
+  String sql = "SELECT id, name, stylistId FROM tasks";
   try(Connection con = DB.sql2o.open()) {
    return con.createQuery(sql).executeAndFetch(Client.class);
   }
@@ -47,17 +42,15 @@ public class Client{
         Client newClient = (Client) otherClient;
         return this.getId() == newClient.getId() &&
                this.getName().equals(newClient.getName()) &&
-               this.getDate().equals(newClient.getDate()) &&
                this.getStylistId() == newClient.getStylistId();
       }
     }
 
     public void save() {
   try(Connection con = DB.sql2o.open()) {
-    String sql = "INSERT INTO clients(name, date, stylistId) VALUES (:name, :date, :stylistId)";
+    String sql = "INSERT INTO clients(name, stylistId) VALUES (:name, :stylistId)";
     this.id = (int) con.createQuery(sql, true)
       .addParameter("name", this.name)
-      .addParameter("date", this.date)
       .addParameter("stylistId", this.stylistId)
       .executeUpdate()
       .getKey();
@@ -83,3 +76,14 @@ public class Client{
     .executeUpdate();
     }
   }
+
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+    String sql = "DELETE FROM clients WHERE id = :id;";
+    con.createQuery(sql)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+
+}

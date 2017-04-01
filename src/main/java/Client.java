@@ -4,10 +4,12 @@ import org.sql2o.*;
 
 public class Client{
   private String name;
+  private int stylistId;
+
   // SQL calculates this
   private int id;
-  //
-  private int stylistId;
+
+
 
   public Client(String name, int stylistId){
     this.name = name;
@@ -26,8 +28,9 @@ public class Client{
     return id;
   }
 
-  public static List<Client> all() {
-  String sql = "SELECT id, name, stylistId FROM clients";
+  // List<Client> Maybe needs to be initialized
+  public static List<Client>all() {
+  String sql = "SELECT id, name FROM clients";
   try(Connection con = DB.sql2o.open()) {
    return con.createQuery(sql).executeAndFetch(Client.class);
   }

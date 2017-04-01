@@ -5,21 +5,23 @@ import java.util.Arrays;
 
 public class StylistTest {
 
-    @Before
-  public void setUp() {
-    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", null, null);
-  }
 
-  @After
-  public void tearDown() {
-  try(Connection con = DB.sql2o.open()) {
-    String sql = "DELETE FROM stylists *;";
-    con.createQuery(sql).executeUpdate();
-    }
-  }
+    @Rule
+    public DatabaseRule database = new DatabaseRule();
 
-  @Rule
-  public DatabaseRule database = new DatabaseRule();
+  //   @Before
+  // public void setUp() {
+  //   DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", null, null);
+  // }
+  //
+  // @After
+  // public void tearDown() {
+  // try(Connection con = DB.sql2o.open()) {
+  //   String sql = "DELETE FROM stylists *;";
+  //   con.createQuery(sql).executeUpdate();
+  //   }
+  // }
+
 
   @Test
   public void Stylist_instantiatesCorrectly_true() {

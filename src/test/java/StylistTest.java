@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 public class StylistTest {
 
-
     @Rule
     public DatabaseRule database = new DatabaseRule();
 
@@ -92,6 +91,7 @@ public class StylistTest {
     Client secondClient = new Client("Carson", myStylist.getId());
     secondClient.save();
     Client[] clients = new Client[] { firstClient, secondClient };
+
     assertTrue(myStylist.getClients().containsAll(Arrays.asList(clients)));
   }
 

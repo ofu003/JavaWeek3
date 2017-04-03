@@ -28,8 +28,8 @@ public class Client{
     return id;
   }
 
-  // List<Client> Maybe needs to be initialized
-  public static List<Client>all() {
+  // Needs to be a space between <Client> and all()
+  public static List<Client> all() {
   String sql = "SELECT id, name, stylistId FROM clients";
   try(Connection con = DB.sql2o.open()) {
    return con.createQuery(sql).executeAndFetch(Client.class);

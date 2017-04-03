@@ -36,9 +36,11 @@ public void Client_instantiatesWithName_Alice() {
 }
 
 @Test
-public void all_returnsAllInstances_true() {
+public void all_returnsAllInstancesofClient_true() {
   Client firstClient = new Client("Alice", 1);
+  firstClient.save();
   Client secondClient = new Client("Bob", 2);
+  secondClient.save();
   assertEquals (true, Client.all().get(0).equals(firstClient));
   assertEquals (true, Client.all().get(1).equals(secondClient));
 }

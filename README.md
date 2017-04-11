@@ -21,7 +21,21 @@
 
 ## Setup and Installation Requirements
 
-Clone this  [repository](https://github.com/ofu997/JavaWeek3). In your terminal window, Navigate to the repository. Enter "gradle run". Go to "localhost:4567" in a browser.
+Clone this  [repository](https://github.com/ofu997/JavaWeek3 and navigate to it. This will be the first tab.  
+
+In a second terminal window, run $postgres.
+
+In a third tab, run $psql, then #CREATE DATABASE hair_salon.
+
+In the first tab, type $psql hair_salon < hair_salon/sql
+
+In the third tab type #\c hair_salon to connect to the database, then # CREATE DATABASE hair_salon_test WITH TEMPLATE hair_salon.
+
+In the first tab enter "gradle run".
+
+Go to "localhost:4567" in a browser.
+
+
 
 
 

@@ -104,4 +104,7 @@ public void save_savesStylistIdIntoDB_true() {
     assertEquals(null, Client.find(myClientId));
   }
 
+
+  }
+
 }

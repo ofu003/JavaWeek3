@@ -73,7 +73,7 @@ public class App {
       String name = request.queryParams("name");
       Client newClient = new Client(name, stylist.getId());
       newClient.save();
-      // velocity form
+      // for velocity form
       model.put("stylist", stylist);
       model.put("template", "templates/stylist-client-success.vtl");
       return new ModelAndView(model, layout);
@@ -108,7 +108,6 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
       model.put("stylist", stylist);
-
       model.put("template", "templates/stylist.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

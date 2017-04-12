@@ -4,7 +4,7 @@
 <h2>Edit client:</h2>
 
 <form action="/stylists/$client.getStylistId()/clients/$client.getId()" method="post">
-  <label for="nameOfClient">Name</label>
+  <label for="nameOfClient">Name and necessary details </label>
   <input id="nameOfClient" name="nameOfClient" type="text">
   <button type="submit" class="btn btn-info">Update Client</button>
 </form>
@@ -15,3 +15,5 @@
 
 <br>
 <a href="/stylists/$stylist.getId()"><h3>Return to $stylist.getName()</h3></a>
+<br> 
+<h4><a href="/">Home</a></h4>

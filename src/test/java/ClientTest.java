@@ -105,6 +105,6 @@ public void save_savesStylistIdIntoDB_true() {
   }
 
 
-  }
 
-}
+
+} // closes class

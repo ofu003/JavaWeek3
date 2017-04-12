@@ -62,7 +62,7 @@ public class App {
       Stylist stylist = Stylist.find(client.getStylistId());
       client.delete();
       model.put("stylist", stylist);
-      model.put("template", "templates/stylist.vtl");
+      model.put("template", "templates/stylist-delete-success.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -128,6 +128,17 @@ public class App {
       stylist.delete();
       model.put("stylist", stylist);
       model.put("template", "templates/stylist-delete-success.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/stylists/:stylist_id", (request,response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Stylist stylist = Stylist.find(Integer.parseInt(request.params(":stylist_id")));
+      String nameOfStylist = request.queryParams("nameOfStylist");
+      stylist.update(nameOfStylist);
+      String url = String.format("/stylists/%d", stylist.getId());
+      response.redirect(url);
+      model.put ("template", "templates/stylist.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

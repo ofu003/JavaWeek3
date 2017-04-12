@@ -70,7 +70,7 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       //get stylist id and client details from form, make & save new client
       Stylist stylist = Stylist.find(Integer.parseInt(request.queryParams("stylistId")));
-      String name = request.queryParams("nameOfClient");
+      String name = request.queryParams("name");
       Client newClient = new Client(name, stylist.getId());
       newClient.save();
       // for velocity form
